@@ -1,5 +1,6 @@
 package com.example.demo.drug;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,9 +10,15 @@ import java.util.List;
 // thing that is more specific, allows StudentService to be used as
 // a Spring Bean
 public class DrugService {
+
+    private final DrugRepository drugRepository;
+
+    @Autowired
+    public DrugService(DrugRepository drugRepository) {
+        this.drugRepository = drugRepository;
+    }
+
     public List<Drug> getDrugs(){
-        return List.of(
-                new Drug("Insulin", "Pfizer")
-        );
+        return drugRepository.findAll();
     }
 }
