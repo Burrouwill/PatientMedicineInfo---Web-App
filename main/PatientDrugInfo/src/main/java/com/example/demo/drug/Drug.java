@@ -19,8 +19,6 @@ public class Drug {
     private String drug_name;
     private String brand;
 
-    public Drug(){}
-
     public Drug(Long drug_id, String drug_name, String brand){
         this.drug_id = drug_id;
         this.drug_name = drug_name;
@@ -34,36 +32,5 @@ public class Drug {
         this.brand = brand;
     }
 
-    public Long getDrug_id() {
-        return drug_id;
-    }
 
-    public void setDrug_id(Long drug_id) {
-        this.drug_id = drug_id;
-    }
-
-    public String getDrug_name() {
-        return drug_name;
-    }
-
-    public void setDrug_name(String drug_name) {
-        this.drug_name = drug_name;
-    }
-
-    public String getBrand() {
-        return brand;
-    }
-
-    public void setBrand(String brand) {
-        this.brand = brand;
-    }
-
-    @Override
-    public String toString() {
-        return "Drug{" +
-                "drug_id=" + drug_id +
-                ", drug_name='" + drug_name + '\'' +
-                ", brand='" + brand + '\'' +
-                '}';
-    }
 }
