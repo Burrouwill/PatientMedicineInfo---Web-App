@@ -1,5 +1,6 @@
 package com.example.demo.drug;
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,7 @@ public class DrugService {
         this.drugRepository = drugRepository;
     }
 
+    @Transactional
     public List<Drug> getDrugs(){
         return drugRepository.findAll();
     }

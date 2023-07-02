@@ -1,5 +1,6 @@
 package com.example.demo.drug;
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +22,7 @@ public class DrugController {
     }
 
     @GetMapping
+    @Transactional
     public List<Drug> getDrugs(){
         return drugService.getDrugs();
     }

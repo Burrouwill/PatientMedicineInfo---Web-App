@@ -12,10 +12,15 @@ public class DrugConfig {
     @Bean
     CommandLineRunner commandLineRunner(DrugRepository repository){
         return args -> {
-            Drug aspirin_1 = new Drug("Aspirin", "Ethics");
-            Drug aspirin_2 = new Drug("Aspirin", "Pfizer");
-            Drug a3 = new Drug("Kappa", "123");
-            repository.saveAll(List.of(aspirin_1,aspirin_2,a3));
+            // (drugName, pseudonyms, drugClass, strength, dosing, form, brandName);
+            Drug amoxicillin = new Drug("Amoxicillin",
+                    List.of("Alphamox","Apotex","m-Amoxicillin"),
+                    Drug.DrugClass.ANTIBIOTIC,
+                    "500mg",
+                    "500mg capsule every 8 hours",
+                    Drug.DrugForm.CAPSULE,
+                    null);
+            repository.saveAll(List.of(amoxicillin));
         };
     }
 }
