@@ -1,18 +1,27 @@
-package com.example.demo.drug;
+package com.example.demo.Drug;
 
+import com.example.demo.Adr.Adr;
 import jakarta.persistence.*;
 
-import java.math.BigDecimal;
 import java.util.List;
 
+/**
+ * Represents a Drug and some of the characteristics of that Drug.
+ */
 @Entity
-@Table(name = "drug")
+@Table(name = "Drug")
 public class Drug {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int drugId;
 
     private String drugName;
+
+    @ManyToMany
+    @JoinTable(name = "drug_advice",
+            joinColumns = @JoinColumn(name = "drug_id"),
+            inverseJoinColumns = @JoinColumn(name = "advice_id"))
+    private List<Adr> advice;
 
     @ElementCollection
     private List<String> pseudonyms;
@@ -28,11 +37,12 @@ public class Drug {
     private String brandName;
 
     public Drug() {
-        // Default constructor required by JPA
+
     }
 
-    public Drug(String drugName, List<String> pseudonyms, DrugClass drugClass, String strength, String dosing, DrugForm form, String brandName) {
+    public Drug(String drugName, List<Adr> advice, List<String> pseudonyms, DrugClass drugClass, String strength, String dosing, DrugForm form, String brandName) {
         this.drugName = drugName;
+        this.advice = advice;
         this.pseudonyms = pseudonyms;
         this.drugClass = drugClass;
         this.strength = strength;
@@ -47,7 +57,29 @@ public class Drug {
     public enum DrugClass {
 
         ANTIBIOTIC("Used to treat bacterial infections."),
-        ANTIDEPRESSANT("Commonly used to treat depression & anxiety.");
+        ANTIDEPRESSANT("Commonly used to treat depression & anxiety."),
+        ANALGESIC("Used for pain relief."),
+        ANTIHYPERTENSIVE("Used to lower blood pressure."),
+        ANTIHISTAMINE_1STGEN("Used to relieve allergy symptoms."),
+        ANTIHISTAMINE_2NDGEN("Used to relieve allergy symptoms."),
+        ANTIINFLAMMATORY("Used to reduce inflammation."),
+        ANTICOAGULANT("Used to prevent blood clotting."),
+        ANTICONVULSANT("Used to control seizures."),
+        ANTIDIABETIC("Used to manage diabetes."),
+        ANTIEMETIC("Used to prevent or treat nausea and vomiting."),
+        ANTIFUNGAL("Used to treat fungal infections."),
+        ANTIPLATELET("Used to prevent blood clots."),
+        ANTIPSYCHOTIC("Used to manage mental disorders."),
+        ANTIVIRAL("Used to treat viral infections."),
+        DIURETIC("Used to increase urine production."),
+        IMMUNOSUPPRESSANT("Used to suppress the immune system."),
+        LAXATIVE("Used to promote bowel movements."),
+        MUSCLE_RELAXANT("Used to relax muscles."),
+        NSAID("Nonsteroidal anti-inflammatory drugs used for pain and inflammation."),
+        SEDATIVE("Used to promote relaxation and sleep."),
+        STEROID("Used for their anti-inflammatory properties."),
+        THYROID("Used to manage thyroid disorders."),
+        VITAMIN("Used to supplement vitamin deficiencies.");
 
         private final String description;
 
@@ -61,7 +93,7 @@ public class Drug {
     }
 
     /**
-     * The different physical forms / delivery systems a drug can be delivered in.
+     * The different physical forms / delivery systems a Drug can be delivered in.
      */
     public enum DrugForm {
         BUCCAL_FILM,
