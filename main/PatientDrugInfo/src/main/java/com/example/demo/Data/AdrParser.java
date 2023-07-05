@@ -15,19 +15,45 @@ public class AdrParser {
     public List<Adr> parseAdrsFromText(Resource data) {
         try (Scanner scanner = new Scanner(data.getInputStream())) {
             List<Adr> adrs = new ArrayList<>();
+            StringBuilder adrBuilder = new StringBuilder();
+            boolean isReadingAdr = false;
 
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
                 if (line.trim().isEmpty()) {
+                    if (isReadingAdr) {
+                        String adrText = adrBuilder.toString().trim();
+                        if (!adrText.isEmpty()) {
+                            String[] parts = adrText.split("\"");
+                            if (parts.length >= 2) {
+                                String effect = parts[1].replaceAll("\\s+", " ").replaceAll("\\n+", " ");
+                                String advice = parts[3].replaceAll("\\s+", " ").replaceAll("\\n+", " ");; // Use index 3 for the advice part
+
+                                adrs.add(new Adr(effect.trim(), advice.trim()));
+                            }
+                        }
+
+                        adrBuilder.setLength(0);
+                        isReadingAdr = false;
+                    }
                     continue; // Skip empty lines
                 }
 
-                String[] parts = line.split("\""); // Split the line using "
-                if (parts.length >= 2) {
-                    String effect = parts[1]; // Get the effect from the second element
-                    String advice = parts[1]; // Get the advice from the third element
+                adrBuilder.append(line).append("\n");
+                isReadingAdr = true;
+            }
 
-                    adrs.add(new Adr(effect.trim(), advice.trim()));
+            if (isReadingAdr) {
+                // Handle the last ADR if there is no empty line at the end
+                String adrText = adrBuilder.toString().trim();
+                if (!adrText.isEmpty()) {
+                    String[] parts = adrText.split("\"");
+                    if (parts.length >= 2) {
+                        String effect = parts[1];
+                        String advice = parts[3]; // Use index 3 for the advice part
+
+                        adrs.add(new Adr(effect.trim(), advice.trim()));
+                    }
                 }
             }
 
@@ -36,5 +62,6 @@ public class AdrParser {
             throw new RuntimeException("Failed to parse Adrs.");
         }
     }
+
 }
 
