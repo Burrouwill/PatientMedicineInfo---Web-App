@@ -1,0 +1,35 @@
+ToDo:
+
+Consider Simplifying the Adr class to one field / description
+
+Parsers for Adr & Drug
+
+Drugs:
+
+- Change the Drug description to: commonadrs
+
+- need to figure out how to format and  parse drug info
+
+Front end
+- Have a general side effect  description / general     
+    advice:
+        "Everyone responds differently to medicines, which means that different people will experience different side effects."
+
+        "Whenever you are taking a medicine for the first time, make sure you keep an eye out for any major side effects."
+
+        "Many medicines have expected side effects,  for example: feeling sleepy or having an upset stomach. These can often be minimised by following certian advice. 
+
+        However, if you experience pain, trouble breathing, an allergic reaction, vommiting or any other major discomfort contact your Doctor or Pharmacist immediately."
+
+    
+- Basic set of screens
+- User screen to have collection of all the users       
+    medicines
+
+User support 
+
+ - DB needs to store usernames &  passwords & save them
+
+
+
+
