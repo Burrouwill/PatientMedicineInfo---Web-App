@@ -6,6 +6,7 @@ import org.springframework.core.io.Resource;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -28,7 +29,7 @@ public class DrugParser {
                         String drugText = drugBuilder.toString();
                         if (!drugText.isEmpty()) {
                             String[] parts = drugText.split("\n");
-                            if (parts.length == 8){
+                            if (parts.length == 8) {
 
                                 String drugName = parseDrugname(parts[0]);
                                 List<Adr> advice = parseAdvice(parts[1]);
@@ -39,7 +40,7 @@ public class DrugParser {
                                 Drug.DrugForm form = parseDrugForm(parts[6]);
                                 String brandName = parseBrandName(parts[7]);
 
-                                drugs.add(new Drug(drugName,advice,pseudonyms,drugClass,strength,dosing,form,brandName));
+                                drugs.add(new Drug(drugName, advice, pseudonyms, drugClass, strength, dosing, form, brandName));
                             }
                         }
 
@@ -58,7 +59,7 @@ public class DrugParser {
                 String drugText = drugBuilder.toString();
                 if (!drugText.isEmpty()) {
                     String[] parts = drugText.split("\n");
-                    if (parts.length == 8){
+                    if (parts.length == 8) {
 
                         String drugName = parseDrugname(parts[0]);
                         List<Adr> advice = parseAdvice(parts[1]);
@@ -69,11 +70,11 @@ public class DrugParser {
                         Drug.DrugForm form = parseDrugForm(parts[6]);
                         String brandName = parseBrandName(parts[7]);
 
-                        drugs.add(new Drug(drugName,advice,pseudonyms,drugClass,strength,dosing,form,brandName));
+                        drugs.add(new Drug(drugName, advice, pseudonyms, drugClass, strength, dosing, form, brandName));
                     }
                 }
             }
-            
+
             return drugs;
         } catch (IOException e) {
             throw new RuntimeException("Failed to parse Drugs.");
@@ -84,21 +85,46 @@ public class DrugParser {
      * Helper Methods
      */
     private String parseBrandName(String part) {
+        if (part.trim().isEmpty()) {
+            throw new IllegalArgumentException("Empty BrandName");
+        }
+        if (part == "null") {
+            return null;
+        }
+        return part;
     }
 
     private Drug.DrugForm parseDrugForm(String part) {
+        if (part == null || part.trim().isEmpty()) {
+            throw new IllegalArgumentException("Drug must have a form.");
+        }
+        return Drug.DrugForm.valueOf(part);
     }
 
     private String parseDosing(String part) {
+        if (part == null || part.trim().isEmpty()) {
+            throw new IllegalArgumentException("Drug must have a dose.");
+        }
+        return part;
     }
 
     private String parseStrength(String part) {
+        if (part == null || part.trim().isEmpty()) {
+            throw new IllegalArgumentException("Drug must have a strength.");
+        }
+        return part;
     }
 
     private List<Drug.DrugClass> parseDrugClass(String part) {
+        if (part == null || part.trim().isEmpty()) {
+            throw new IllegalArgumentException("Drug must have a class.");}
+        // Process part into tidy sub strings
+        String[] subStrings = part.replace("[","").replace("]","").trim().split(",");
+        // Sort DrugClasses alphabetically, return the equivalent DrugClass Enum
+        return Arrays.stream(subStrings).sorted().map(e -> Drug.DrugClass.valueOf(e)).toList();
     }
 
-    private List<String> parsePseuonyms(String part) {
+    private List<String> parsePseudonyms(String part) {
     }
 
     private List<Adr> parseAdvice(String part) {
