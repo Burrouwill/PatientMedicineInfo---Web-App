@@ -27,7 +27,7 @@ public class Drug {
     private List<String> pseudonyms;
 
     @Enumerated(EnumType.STRING)
-    private DrugClass drugClass;
+    private List<DrugClass> drugClass;
 
     private String strength;
     private String dosing;
@@ -40,7 +40,7 @@ public class Drug {
 
     }
 
-    public Drug(String drugName, List<Adr> advice, List<String> pseudonyms, DrugClass drugClass, String strength, String dosing, DrugForm form, String brandName) {
+    public Drug(String drugName, List<Adr> advice, List<String> pseudonyms, List<DrugClass> drugClass, String strength, String dosing, DrugForm form, String brandName) {
         this.drugName = drugName;
         this.advice = advice;
         this.pseudonyms = pseudonyms;
@@ -69,7 +69,7 @@ public class Drug {
         ANTIEMETIC("Used to prevent or treat nausea and vomiting."),
         ANTIFUNGAL("Used to treat fungal infections."),
         ANTIPLATELET("Used to prevent blood clots."),
-        ANTIPSYCHOTIC("Used to manage mental disorders."),
+        ANTIPSYCHOTIC("Used to manage mental health disorders."),
         ANTIVIRAL("Used to treat viral infections."),
         DIURETIC("Used to increase urine production."),
         IMMUNOSUPPRESSANT("Used to suppress the immune system."),
@@ -222,11 +222,11 @@ public class Drug {
         this.pseudonyms = pseudonyms;
     }
 
-    public DrugClass getDrugClass() {
+    public List<DrugClass> getDrugClass() {
         return drugClass;
     }
 
-    public void setDrugClass(DrugClass drugClass) {
+    public void setDrugClass(List<DrugClass> drugClass) {
         this.drugClass = drugClass;
     }
 

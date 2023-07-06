@@ -20,7 +20,9 @@ public class AdrController {
 
     @GetMapping
     @Transactional
-    public List<Adr> getAdrs() {return adrService.getAdrs();}
+    public List<Adr> getAdrs() {
+        return adrService.getAdrs();
+    }
 
 }
 

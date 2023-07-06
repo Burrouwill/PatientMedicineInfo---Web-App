@@ -13,15 +13,7 @@ public class DrugConfig {
     CommandLineRunner commandLineRunner(DrugRepository repository) {
         return args -> {
             // (drugName, pseudonyms, drugClass, strength, dosing, form, brandName);
-            Drug amoxicillin = new Drug(
-                    "Amoxicillin",
-                    null,
-                    List.of("Alphamox", "Apotex", "m-Amoxicillin"),
-                    Drug.DrugClass.ANTIBIOTIC,
-                    "500mg",
-                    "500mg capsule every 8 hours",
-                    Drug.DrugForm.CAPSULE,
-                    null);
+            Drug amoxicillin = new Drug();
             repository.saveAll(List.of(amoxicillin));
         };
     }

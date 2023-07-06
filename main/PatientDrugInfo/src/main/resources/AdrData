@@ -1,3 +1,39 @@
+HEAVYDRINKING = "Avoid if you have been drinking a lot of alcohol recently."
+                "Your body processes alcohol in a similar way to this medicine. Taking this medicine if you have been drinking"
+                excessively in the past few days (3+ standard drinks a day) can cause damage to your liver.
+
+LIVER = "Can be harmful to your Liver."
+        "If you have problems with your Liver, make sure to check with your Doctor or Pharmacist
+         before taking this medicine."
+
+RENAL = "Can be harmful to your Kidneys."
+        "If you have problems with your Kidneys, make sure to check with your Doctor or Pharmacist
+        before taking this medicine."
+
+PAIN = "Keep track of when you take this medicine."
+       "Before taking each dose, make sure you have waited the correct amount of time since taking your last dose.
+        Taking your next dose too quickly can cause side effects and sometimes even permanent damage. Leaving too much
+        time in between taking doses can man that the medicine might not work properly."
+
+BREASTFEEDING_SAFE = "You can safely take this medication while breastfeeding."
+                    "You can continue breastfeeding while using this medication, but always consult with your healthcare provider for personalized advice."
+
+BREASTFEEDING_UNSAFE = "Avoid using this medication while breastfeeding."
+                        "This medicine can pass into breast milk and may harm your baby.
+                        Speak with your healthcare provider to explore alternative options that are safe for breastfeeding."
+
+PREGNANCY_SAFE = "This medication is considered safe to use during pregnancy."
+                  "You can take this medication at any stage of pregnancy without worrying about any negative effects on your baby's development."
+
+PREGNANCY_UNSAFE = "Avoid taking this medication during pregnancy."
+                    "There is a risk that this medication could harm your baby's development if taken during pregnancy.
+                    Avoid using this medication if you are pregnant or planning to become pregnant.
+                    Speak with your healthcare provider to explore alternative options that are safe for pregnancy."
+
+PREGNANCY_CAUTION_WITH_CONSULTATION = "Caution is when considering the use of this medication during pregnancy, as its safety may vary depending on the trimester."
+                                        "Please consult your healthcare provider before taking this medication, particularly if you are in the first or third trimester."
+                                        "Your healthcare provider can assess the potential risks and benefits based on the specific trimester and provide guidance tailored to your individual circumstances."
+
 CAL1 = "This medicine may make you sleepy and make it dangerous to drive or operate machinery."
         "Limit alcohol intake. Check if this medicine makes you drowsy / sleepy before operating machinery or driving.";
 
@@ -51,4 +87,5 @@ CAL14 = "Shake the bottle before each dose."
 
 WHOLE = "Swallow whole, do not crush or chew."
         "This medicine has a special coating, which helps it work. Crushing or chewing can cause this medicine to
-        "not work properly and might cause side effects.";
+        not work properly and might cause side effects.";
+

@@ -9,17 +9,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Parses information about Adr objects from raw text. Creates Adr objects and loads them into postgres.
+ */
 @Component
 public class AdrParser {
 
     public List<Adr> parseAdrsFromText(Resource data) {
         try (Scanner scanner = new Scanner(data.getInputStream())) {
+
             List<Adr> adrs = new ArrayList<>();
             StringBuilder adrBuilder = new StringBuilder();
             boolean isReadingAdr = false;
 
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
+                // Process the block of text once we find an empty line
                 if (line.trim().isEmpty()) {
                     if (isReadingAdr) {
                         String adrText = adrBuilder.toString().trim();
@@ -27,9 +32,9 @@ public class AdrParser {
                             String[] parts = adrText.split("\"");
                             if (parts.length >= 2) {
                                 String effect = parts[1].replaceAll("\\s+", " ").replaceAll("\\n+", " ");
-                                String advice = parts[3].replaceAll("\\s+", " ").replaceAll("\\n+", " ");; // Use index 3 for the advice part
+                                String advice = parts[3].replaceAll("\\s+", " ").replaceAll("\\n+", " "); // Use index 3 for the advice part
 
-                                adrs.add(new Adr(effect.trim(), advice.trim()));
+                                adrs.add(new Adr(effect, advice));
                             }
                         }
 
@@ -38,7 +43,7 @@ public class AdrParser {
                     }
                     continue; // Skip empty lines
                 }
-
+                // Line wasn't  empty --> Add it
                 adrBuilder.append(line).append("\n");
                 isReadingAdr = true;
             }
@@ -49,10 +54,10 @@ public class AdrParser {
                 if (!adrText.isEmpty()) {
                     String[] parts = adrText.split("\"");
                     if (parts.length >= 2) {
-                        String effect = parts[1];
-                        String advice = parts[3]; // Use index 3 for the advice part
+                        String effect = parts[1].replaceAll("\\s+", " ").replaceAll("\\n+", " ");;
+                        String advice = parts[3].replaceAll("\\s+", " ").replaceAll("\\n+", " ");; // Use index 3 for the advice part
 
-                        adrs.add(new Adr(effect.trim(), advice.trim()));
+                        adrs.add(new Adr(effect, advice));
                     }
                 }
             }
