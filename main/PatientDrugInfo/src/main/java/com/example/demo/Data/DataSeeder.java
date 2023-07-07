@@ -2,6 +2,7 @@ package com.example.demo.Data;
 
 import com.example.demo.Adr.Adr;
 import com.example.demo.Adr.AdrRepository;
+import com.example.demo.Adr.AdrService;
 import com.example.demo.Drug.Drug;
 import com.example.demo.Drug.DrugRepository;
 import jakarta.annotation.PostConstruct;
@@ -18,12 +19,14 @@ import java.util.List;
 @Component
 public class DataSeeder {
 
-    private final AdrRepository adrRepository;
+    private final AdrRepository adrRepository; // For mapping adrs to postgres
+    private final AdrService adrService; // To call findAdrById(), as this is business logic and not CRUD? Unsure if it really belongs here
     private final DrugRepository drugRepository;
     private final ResourceLoader resourceLoader;
 
-    public DataSeeder(AdrRepository adrRepository, DrugRepository drugRepository, ResourceLoader resourceLoader) {
+    public DataSeeder(AdrRepository adrRepository, AdrService adrService, DrugRepository drugRepository, ResourceLoader resourceLoader) {
         this.adrRepository = adrRepository;
+        this.adrService = adrService;
         this.drugRepository = drugRepository;
         this.resourceLoader = resourceLoader;
     }
@@ -33,13 +36,12 @@ public class DataSeeder {
         Resource drugResource = resourceLoader.getResource("classpath:DrugData");
         Resource adrResource = resourceLoader.getResource("classpath:AdrData");
 
-
-        parseAndLoadDrugs(drugResource);
         parseAndLoadAdrs(adrResource);
+        parseAndLoadDrugs(drugResource);
     }
 
     private void parseAndLoadDrugs(Resource data){
-        DrugParser drugParser = new DrugParser();
+        DrugParser drugParser = new DrugParser(adrService);
         List<Drug> drugs = drugParser.parseDrugsFromText(data);
         drugRepository.saveAll(drugs);
     }
@@ -49,6 +51,5 @@ public class DataSeeder {
         List<Adr> adrs = adrParser.parseAdrsFromText(data);
         adrRepository.saveAll(adrs);
     }
-
 }
 

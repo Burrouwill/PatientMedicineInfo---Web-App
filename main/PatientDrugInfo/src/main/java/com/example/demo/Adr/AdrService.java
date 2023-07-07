@@ -21,6 +21,9 @@ public class AdrService {
         return adrRepository.findAll();
     }
 
-
+    @Transactional
+    public Adr getAdrById(int adrId) {
+        return adrRepository.findById(adrId).orElseThrow((() -> new IllegalArgumentException("Couldn't find any Adr with id: "+adrId)));
+    }
 }
 

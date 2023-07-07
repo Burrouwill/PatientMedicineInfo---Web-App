@@ -69,6 +69,7 @@ public class Drug {
         ANTIEMETIC("Used to prevent or treat nausea and vomiting."),
         ANTIFUNGAL("Used to treat fungal infections."),
         ANTIPLATELET("Used to prevent blood clots."),
+        ANTIPYRETIC("Used to treat fevers."),
         ANTIPSYCHOTIC("Used to manage mental health disorders."),
         ANTIVIRAL("Used to treat viral infections."),
         DIURETIC("Used to increase urine production."),

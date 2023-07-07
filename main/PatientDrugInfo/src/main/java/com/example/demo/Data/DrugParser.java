@@ -1,8 +1,11 @@
 package com.example.demo.Data;
 
 import com.example.demo.Adr.Adr;
+import com.example.demo.Adr.AdrService;
 import com.example.demo.Drug.Drug;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,7 +16,17 @@ import java.util.Scanner;
 /**
  * Parses data from Drugs text file. Creates Drug objects and adds to postgres.
  */
+@Component
 public class DrugParser {
+
+    private final AdrService adrService;
+
+    @Autowired
+    public DrugParser(AdrService adrService) {
+        this.adrService = adrService;
+    }
+
+
     public List<Drug> parseDrugsFromText(Resource data) {
         try (Scanner scanner = new Scanner(data.getInputStream())) {
 
@@ -33,7 +46,7 @@ public class DrugParser {
 
                                 String drugName = parseDrugname(parts[0]);
                                 List<Adr> advice = parseAdvice(parts[1]);
-                                List<String> pseudonyms = parsePseuonyms(parts[2]);
+                                List<String> pseudonyms = parsePseudonyms(parts[2]);
                                 List<Drug.DrugClass> drugClass = parseDrugClass(parts[3]);
                                 String strength = parseStrength(parts[4]);
                                 String dosing = parseDosing(parts[5]);
@@ -63,7 +76,7 @@ public class DrugParser {
 
                         String drugName = parseDrugname(parts[0]);
                         List<Adr> advice = parseAdvice(parts[1]);
-                        List<String> pseudonyms = parsePseuonyms(parts[2]);
+                        List<String> pseudonyms = parsePseudonyms(parts[2]);
                         List<Drug.DrugClass> drugClass = parseDrugClass(parts[3]);
                         String strength = parseStrength(parts[4]);
                         String dosing = parseDosing(parts[5]);
@@ -117,19 +130,49 @@ public class DrugParser {
 
     private List<Drug.DrugClass> parseDrugClass(String part) {
         if (part == null || part.trim().isEmpty()) {
-            throw new IllegalArgumentException("Drug must have a class.");}
+            throw new IllegalArgumentException("Drug must have a class.");
+        }
         // Process part into tidy sub strings
-        String[] subStrings = part.replace("[","").replace("]","").trim().split(",");
+        String[] subStrings = part.replace("[", "").replace("]", "").trim().split(",");
         // Sort DrugClasses alphabetically, return the equivalent DrugClass Enum
-        return Arrays.stream(subStrings).sorted().map(e -> Drug.DrugClass.valueOf(e)).toList();
+        return Arrays.stream(subStrings)
+                .sorted()
+                .map(e -> Drug.DrugClass.valueOf(e.trim()))
+                .toList();
     }
 
     private List<String> parsePseudonyms(String part) {
+        if (part == null || part.trim().isEmpty()) {
+            throw new IllegalArgumentException("Drug must have a brand name as well as a drug name.");
+        }
+        // Process part into tidy substrings
+        String[] subStrings = part.replace("[", "").replace("]", "").trim().split(",");
+        // Sort and return list of pseudonyms
+        return Arrays.stream(subStrings).sorted().toList();
     }
 
     private List<Adr> parseAdvice(String part) {
+        if (part.trim().isEmpty()) {
+            throw new IllegalArgumentException("Invalid advice argument.");
+        }
+        if (part == "null") {
+            return null;
+        }
+        // Process part into tidy substrings
+        String[] subStrings = part.replace("[", "").replace("]", "").trim().split(",");
+
+        // Retrive & return list of Adr's
+        return Arrays.stream(subStrings)
+                .map(Integer::parseInt)
+                .mapToInt(Integer::intValue) // Convert Integer to int
+                .mapToObj(adrService::getAdrById)
+                .toList();
     }
 
     private String parseDrugname(String part) {
+        if (part == null || part.trim().isEmpty()) {
+            throw new IllegalArgumentException("Drug must have a name.");
+        }
+        return part.trim();
     }
 }

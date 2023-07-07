@@ -18,10 +18,16 @@ public class AdrController {
     @Autowired
     public AdrController(AdrService adrService){ this.adrService = adrService;}
 
-    @GetMapping
+    @GetMapping("/{id}")
     @Transactional
     public List<Adr> getAdrs() {
         return adrService.getAdrs();
+    }
+
+    @GetMapping
+    @Transactional
+    public Adr getAdrById(int adrId){
+        return adrService.getAdrById(adrId);
     }
 
 }
