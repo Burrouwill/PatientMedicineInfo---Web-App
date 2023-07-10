@@ -6,3 +6,273 @@ Paracetamol
 Take 1-2 tablets every 4-6 hours as needed for fever or pain.
 TABLET
 null
+
+Ibuprofen
+[4, 12, 13]
+[Advil, Motrin, Nurofen]
+[ANALGESIC, ANTIINFLAMMATORY]
+200mg
+Take 1-2 tablets every 4-6 hours as needed for pain or inflammation.
+TABLET
+null
+
+Aspirin
+[4, 12, 17]
+[Bayer, Ecotrin, Aspro]
+[ANALGESIC, ANTIPLATELET, ANTIINFLAMMATORY]
+325mg
+Take 1 tablet every 4-6 hours as needed for pain or as directed by a healthcare professional.
+TABLET
+null
+
+Metformin
+[2, 3, 15]
+[Glucophage, Fortamet, Riomet]
+[ANTIDIABETIC]
+500mg
+Take 1 tablet with meals or as directed by a healthcare professional.
+TABLET
+null
+
+Atorvastatin
+[4, 17]
+[Lipitor]
+[LIPID_LOWERING]
+20mg
+Take 1 tablet daily in the evening or as directed by a healthcare professional.
+TABLET
+null
+
+Simvastatin
+[4, 17]
+[Zocor]
+[LIPID_LOWERING]
+40mg
+Take 1 tablet daily in the evening or as directed by a healthcare professional.
+TABLET
+null
+
+Omeprazole
+[12, 13]
+[Prilosec, Losec]
+[PROTON_PUMP_INHIBITOR]
+20mg
+Take 1 capsule daily before breakfast or as directed by a healthcare professional.
+CAPSULE
+null
+
+Amlodipine
+[13]
+[Norvasc]
+[ANTIHYPERTENSIVE]
+5mg
+Take 1 tablet daily or as directed by a healthcare professional.
+TABLET
+null
+
+Levothyroxine
+[13]
+[Synthroid, Levoxyl, Euthyrox]
+[THYROID]
+50mcg
+Take 1 tablet daily on an empty stomach, at least 30 minutes before breakfast.
+TABLET
+null
+
+Amoxicillin
+[13, 15]
+[Amoxil, Trimox]
+[ANTIBIOTIC]
+500mg
+Take 1 capsule every 8 hours or as directed by a healthcare professional.
+CAPSULE
+null
+
+Citalopram
+[19]
+[Celexa]
+[ANTIDEPRESSANT]
+20mg
+Take 1 tablet daily with or without food, or as directed by a healthcare professional.
+TABLET
+null
+
+Sertraline
+[19]
+[Zoloft]
+[ANTIDEPRESSANT]
+50mg
+Take 1 tablet daily with or without food, or as directed by a healthcare professional.
+TABLET
+null
+
+Fluoxetine
+[19]
+[Prozac]
+[ANTIDEPRESSANT]
+20mg
+Take 1 capsule daily with or without food, or as directed by a healthcare professional.
+CAPSULE
+null
+
+Ramipril
+[13]
+[Altace]
+[ANTIHYPERTENSIVE]
+10mg
+Take 1 capsule daily or as directed by a healthcare professional.
+CAPSULE
+null
+
+Salbutamol
+[13]
+[Ventolin, Proventil, Airomir]
+[BRONCHODILATOR]
+2mg
+Take 1 tablet every 4-6 hours as needed for asthma symptoms or as directed by a healthcare professional.
+TABLET
+null
+
+Ventolin
+[13]
+[Salbutamol, Proventil, Airomir]
+[BRONCHODILATOR]
+100mcg
+Inhale 1-2 puffs every 4-6 hours as needed for asthma symptoms or as directed by a healthcare professional.
+INHALER
+null
+
+Gliclazide
+[2, 3, 15]
+[Diamicron, Glyloc]
+[ANTIDIABETIC]
+80mg
+Take 1 tablet daily with breakfast or as directed by a healthcare professional.
+TABLET
+null
+
+Lisinopril
+[13]
+[Prinivil, Zestril]
+[ANTIHYPERTENSIVE]
+10mg
+Take 1 tablet daily or as directed by a healthcare professional.
+TABLET
+null
+
+Pantoprazole
+[12, 13]
+[Protonix]
+[PROTON_PUMP_INHIBITOR]
+40mg
+Take 1 tablet daily before a meal or as directed by a healthcare professional.
+TABLET
+null
+
+Metoprolol
+[13]
+[Lopressor, Toprol]
+[ANTIHYPERTENSIVE]
+25mg
+Take 1 tablet daily or as directed by a healthcare professional.
+TABLET
+null
+
+Warfarin
+[17]
+[Coumadin]
+[ANTICOAGULANT]
+5mg
+Take the prescribed dose as directed by a healthcare professional.
+TABLET
+null
+
+Clopidogrel
+[17]
+[Plavix]
+[ANTIPLATELET]
+75mg
+Take 1 tablet daily or as directed by a healthcare professional.
+TABLET
+null
+
+Bisoprolol
+[13]
+[Zebeta, Monocor]
+[ANTIHYPERTENSIVE]
+5mg
+Take 1 tablet daily or as directed by a healthcare professional.
+TABLET
+null
+
+Gabapentin
+[19]
+[Neurontin, Gralise]
+[ANTICONVULSANT]
+300mg
+Take 1 capsule three times a day or as directed by a healthcare professional.
+CAPSULE
+null
+
+Pregabalin
+[19]
+[Lyrica]
+[ANTICONVULSANT]
+75mg
+Take 1 capsule twice a day or as directed by a healthcare professional.
+CAPSULE
+null
+
+Losartan
+[13]
+[Cozaar]
+[ANTIHYPERTENSIVE]
+50mg
+Take 1 tablet daily or as directed by a healthcare professional.
+TABLET
+null
+
+Metoprolol
+[13]
+[Lopressor, Toprol]
+[ANTIHYPERTENSIVE]
+50mg
+Take 1 tablet daily or as directed by a healthcare professional.
+TABLET
+null
+
+Codeine
+[13, 19]
+[Tylenol 3, Empirin, Capital]
+[ANALGESIC]
+30mg
+Take 1-2 tablets every 4-6 hours as needed for pain or as directed by a healthcare professional.
+TABLET
+null
+
+Tramadol
+[13, 19]
+[Ultram, ConZip, Rybix ODT]
+[ANALGESIC]
+50mg
+Take 1 tablet every 4-6 hours as needed for pain or as directed by a healthcare professional.
+TABLET
+null
+
+Duloxetine
+[19]
+[Cymbalta]
+[ANTIDEPRESSANT]
+60mg
+Take 1 capsule daily with or without food, or as directed by a healthcare professional.
+CAPSULE
+null
+
+Tamsulosin
+[13]
+[Flomax]
+[PROSTATE]
+0.4mg
+Take 1 capsule daily, 30 minutes after the same meal each day, or as directed by a healthcare professional.
+CAPSULE
+null

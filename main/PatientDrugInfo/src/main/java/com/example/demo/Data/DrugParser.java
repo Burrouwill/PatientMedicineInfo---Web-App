@@ -159,7 +159,10 @@ public class DrugParser {
             return null;
         }
         // Process part into tidy substrings
-        String[] subStrings = part.replace("[", "").replace("]", "").trim().split(",");
+        String[] subStrings = part.replace("[", "").replace("]", "").replace(" ", "").split(",");
+
+
+
 
         // Retrive & return list of Adr's
         return Arrays.stream(subStrings)

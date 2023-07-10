@@ -6,9 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="fc769511-b0e3-446c-9786-6ade6478ff65" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PatientDrugInfo/src/main/java/com/example/demo/Adr/AdrController.java" beforeDir="false" afterPath="$PROJECT_DIR$/PatientDrugInfo/src/main/java/com/example/demo/Adr/AdrController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PatientDrugInfo/src/main/java/com/example/demo/Adr/AdrService.java" beforeDir="false" afterPath="$PROJECT_DIR$/PatientDrugInfo/src/main/java/com/example/demo/Adr/AdrService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PatientDrugInfo/src/main/java/com/example/demo/Data/DataSeeder.java" beforeDir="false" afterPath="$PROJECT_DIR$/PatientDrugInfo/src/main/java/com/example/demo/Data/DataSeeder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PatientDrugInfo/src/main/java/com/example/demo/Data/DrugParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/PatientDrugInfo/src/main/java/com/example/demo/Data/DrugParser.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PatientDrugInfo/src/main/java/com/example/demo/Drug/Drug.java" beforeDir="false" afterPath="$PROJECT_DIR$/PatientDrugInfo/src/main/java/com/example/demo/Drug/Drug.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PatientDrugInfo/src/main/resources/DrugData" beforeDir="false" afterPath="$PROJECT_DIR$/PatientDrugInfo/src/main/resources/DrugData" afterDir="false" />
