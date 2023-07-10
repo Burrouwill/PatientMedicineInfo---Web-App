@@ -3,7 +3,9 @@ package com.example.demo.Adr;
 
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,11 +26,12 @@ public class AdrController {
         return adrService.getAdrs();
     }
 
-    @GetMapping
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @Transactional
-    public Adr getAdrById(int adrId){
-        return adrService.getAdrById(adrId);
+    public Adr getAdrById(@PathVariable int id) {
+        return adrService.getAdrById(id);
     }
+
 
 }
 

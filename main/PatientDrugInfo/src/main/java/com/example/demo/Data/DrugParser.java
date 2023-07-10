@@ -53,7 +53,9 @@ public class DrugParser {
                                 Drug.DrugForm form = parseDrugForm(parts[6]);
                                 String brandName = parseBrandName(parts[7]);
 
-                                drugs.add(new Drug(drugName, advice, pseudonyms, drugClass, strength, dosing, form, brandName));
+                                if (drugName != null){
+                                    drugs.add(new Drug(drugName, advice, pseudonyms, drugClass, strength, dosing, form, brandName));
+                                }
                             }
                         }
 
@@ -65,27 +67,6 @@ public class DrugParser {
                 }
                 drugBuilder.append(line).append("\n");
                 isReading = true;
-            }
-
-            if (isReading) {
-                // Handle last Drug if no empty line
-                String drugText = drugBuilder.toString();
-                if (!drugText.isEmpty()) {
-                    String[] parts = drugText.split("\n");
-                    if (parts.length == 8) {
-
-                        String drugName = parseDrugname(parts[0]);
-                        List<Adr> advice = parseAdvice(parts[1]);
-                        List<String> pseudonyms = parsePseudonyms(parts[2]);
-                        List<Drug.DrugClass> drugClass = parseDrugClass(parts[3]);
-                        String strength = parseStrength(parts[4]);
-                        String dosing = parseDosing(parts[5]);
-                        Drug.DrugForm form = parseDrugForm(parts[6]);
-                        String brandName = parseBrandName(parts[7]);
-
-                        drugs.add(new Drug(drugName, advice, pseudonyms, drugClass, strength, dosing, form, brandName));
-                    }
-                }
             }
 
             return drugs;

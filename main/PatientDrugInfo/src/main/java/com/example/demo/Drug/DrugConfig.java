@@ -12,9 +12,7 @@ public class DrugConfig {
     @Bean
     CommandLineRunner commandLineRunner(DrugRepository repository) {
         return args -> {
-            // (drugName, pseudonyms, drugClass, strength, dosing, form, brandName);
-            Drug amoxicillin = new Drug();
-            repository.saveAll(List.of(amoxicillin));
+
         };
     }
 }

@@ -42,12 +42,14 @@ public class DataSeeder {
 
     private void parseAndLoadDrugs(Resource data){
         DrugParser drugParser = new DrugParser(adrService);
+
         List<Drug> drugs = drugParser.parseDrugsFromText(data);
         drugRepository.saveAll(drugs);
     }
 
     private void parseAndLoadAdrs(Resource data){
         AdrParser adrParser = new AdrParser();
+
         List<Adr> adrs = adrParser.parseAdrsFromText(data);
         adrRepository.saveAll(adrs);
     }
