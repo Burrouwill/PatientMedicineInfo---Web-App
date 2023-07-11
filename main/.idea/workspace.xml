@@ -5,10 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fc769511-b0e3-446c-9786-6ade6478ff65" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/PatientDrugInfo/src/main/java/com/example/demo/User/PasswordEncoderConcrete.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PatientDrugInfo/src/main/java/com/example/demo/User/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PatientDrugInfo/src/main/java/com/example/demo/User/UserAuthentication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PatientDrugInfo/src/main/java/com/example/demo/User/UserController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PatientDrugInfo/src/main/java/com/example/demo/User/UserRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PatientDrugInfo/src/main/java/com/example/demo/User/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Notes.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Notes.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PatientDrugInfo/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PatientDrugInfo/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PatientDrugInfo/src/main/java/com/example/demo/Adr/AdrController.java" beforeDir="false" afterPath="$PROJECT_DIR$/PatientDrugInfo/src/main/java/com/example/demo/Adr/AdrController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PatientDrugInfo/src/main/java/com/example/demo/Data/DataSeeder.java" beforeDir="false" afterPath="$PROJECT_DIR$/PatientDrugInfo/src/main/java/com/example/demo/Data/DataSeeder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PatientDrugInfo/src/main/java/com/example/demo/Data/DrugParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/PatientDrugInfo/src/main/java/com/example/demo/Data/DrugParser.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,6 +42,9 @@
     </option>
   </component>
   <component name="ProjectId" id="2RzEoMfD65PVtRhTh9txRm6sVzz" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />

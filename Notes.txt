@@ -1,8 +1,129 @@
 ToDo:
 
-Consider Simplifying the Adr class to one field / description
+Tuesday:
+
+package com.example.user.security;
+
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
+
+@Component
+public class PasswordEncoderImpl implements PasswordEncoder {
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    public PasswordEncoderImpl() {
+        this.bCryptPasswordEncoder = new BCryptPasswordEncoder();
+    }
+
+    @Override
+    public String encode(CharSequence rawPassword) {
+        return bCryptPasswordEncoder.encode(rawPassword);
+    }
+
+    @Override
+    public boolean matches(CharSequence rawPassword, String encodedPassword) {
+        return bCryptPasswordEncoder.matches(rawPassword, encodedPassword);
+    }
+}
+
+
+package com.example.user.security;
+
+import com.example.user.model.User;
+import com.example.user.repository.UserRepository;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
+
+@Component
+public class UserAuthenticationProvider implements AuthenticationProvider {
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+
+    public UserAuthenticationProvider(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
+
+    @Override
+    public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+        String username = authentication.getName();
+        String password = authentication.getCredentials().toString();
+
+        User user = userRepository.findByUsername(username);
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found");
+        }
+
+        if (!passwordEncoder.matches(password, user.getPassword())) {
+            throw new BadCredentialsException("Invalid password");
+        }
+
+        return new UsernamePasswordAuthenticationToken(user, password, user.getAuthorities());
+    }
+
+    @Override
+    public boolean supports(Class<?> authentication) {
+        return authentication.equals(UsernamePasswordAuthenticationToken.class);
+    }
+}
+
+
+package com.example.user.controller;
+
+import com.example.user.model.User;
+import com.example.user.service.UserService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/api/users")
+public class UserRestController {
+    private final UserService userService;
+
+    public UserRestController(UserService userService) {
+        this.userService = userService;
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<User> registerUser(@RequestBody User user) {
+        User registeredUser = userService.registerUser(user);
+        return ResponseEntity.status(HttpStatus.CREATED).body(registeredUser);
+    }
+
+    @GetMapping("/{username}")
+    public ResponseEntity<User> getUserByUsername(@PathVariable String username) {
+        User user = userService.getUserByUsername(username);
+        if (user == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(user);
+    }
+
+    // Other user-related API endpoints
+}
+
+
+
+
+Datapersistence:
+
+- Drugs andd Adrs to be loaded in each time --> Dont think the delete and re load strat is really that legit 
+- User information however needs to be stored
+- What is the best way to acheive this 
 
 Parsers for Adr & Drug
+
+- Refactor Adr parser to remove duplicate code
+
+Distinction between female / non-female for pregnancy breastfeeding advice 
 
 Drugs:
 
@@ -12,6 +133,7 @@ Drugs:
 
 Front end
 - Have a general side effect  description / general     
+- Also in the back? a an Adr obj? 
     advice:
         "Everyone responds differently to medicines, which means that different people will experience different side effects."
 
