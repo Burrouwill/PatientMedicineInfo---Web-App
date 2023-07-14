@@ -5,13 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fc769511-b0e3-446c-9786-6ade6478ff65" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/PatientDrugInfo/src/main/java/com/example/demo/User/PasswordEncoderImplementation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PatientDrugInfo/src/main/java/com/example/demo/User/UserAuthenticationProvider.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PatientDrugInfo/src/main/java/com/example/demo/User/PasswordEncoderConcrete.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PatientDrugInfo/src/main/java/com/example/demo/User/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/PatientDrugInfo/src/main/java/com/example/demo/User/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PatientDrugInfo/src/main/java/com/example/demo/User/UserAuthentication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PatientDrugInfo/src/main/java/com/example/demo/User/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/PatientDrugInfo/src/main/java/com/example/demo/User/UserController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
