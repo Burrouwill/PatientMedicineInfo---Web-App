@@ -1,12 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import {BrowserRouter as Router, Route, Link, Routes} from 'react-router-dom';
+import AccountPage from './Pages/AccountPage';
+import HomePage from './Pages/HomePage';
+import LoginPage from './Pages/LoginPage';
+import MedicinesPage from './Pages/MedicinesPage';
 
-function App() {
+export default function App() {
   return (
-    <div className="App">
-      This is the Patient Web app
-    </div>
+    <Router>
+      <Route exact path="/" component={HomePage} />
+      <Route path="/login" component={LoginPage} />
+      <Route path="/account" component={AccountPage} />
+      <Route path="/medicines" component={MedicinesPage} />
+    </Router>
   );
 }
 
-export default App;
+
