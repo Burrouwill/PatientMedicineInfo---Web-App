@@ -1,18 +1,26 @@
 import React from 'react';
-import {BrowserRouter as Router, Route, Link, Routes} from 'react-router-dom';
+import { Route, Routes, BrowserRouter} from 'react-router-dom';
 import AccountPage from './Pages/AccountPage';
 import HomePage from './Pages/HomePage';
 import LoginPage from './Pages/LoginPage';
 import MedicinesPage from './Pages/MedicinesPage';
+import NoPage from './Pages/NoPage';
+
 
 export default function App() {
   return (
-    <Router>
-      <Route exact path="/" component={HomePage} />
-      <Route path="/login" component={LoginPage} />
-      <Route path="/account" component={AccountPage} />
-      <Route path="/medicines" component={MedicinesPage} />
-    </Router>
+    <div>
+      <BrowserRouter>
+        <Routes>
+          <Route index element={<HomePage/>} />
+          <Route path="/home" element={<HomePage/>}/>
+          <Route path="/login" element={<LoginPage/>} />
+          <Route path="/account" element={<AccountPage/>} />
+          <Route path="/medicines" element={<MedicinesPage/>} />
+          <Route path="*" element={<NoPage/>} />
+        </Routes>
+      </BrowserRouter>
+    </div> 
   );
 }
 
