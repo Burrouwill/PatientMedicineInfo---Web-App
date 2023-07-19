@@ -5,6 +5,7 @@ import HomePage from './Pages/HomePage';
 import LoginPage from './Pages/LoginPage';
 import MedicinesPage from './Pages/MedicinesPage';
 import NoPage from './Pages/NoPage';
+import RegisterPage from './Pages/RegisterPage'
 
 
 export default function App() {
@@ -12,11 +13,12 @@ export default function App() {
     <div>
       <BrowserRouter>
         <Routes>
-          <Route index element={<LoginPage/>} />
+          <Route index element={<RegisterPage/>} />
           <Route path="/home" element={<HomePage/>}/>
           <Route path="/login" element={<LoginPage/>} />
           <Route path="/account" element={<AccountPage/>} />
           <Route path="/medicines" element={<MedicinesPage/>} />
+          <Route path="/register" element={<RegisterPage/>} />
           <Route path="*" element={<NoPage/>} />
         </Routes>
       </BrowserRouter>
