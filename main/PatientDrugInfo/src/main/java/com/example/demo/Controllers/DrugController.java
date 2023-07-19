@@ -1,5 +1,7 @@
-package com.example.demo.Drug;
+package com.example.demo.Controllers;
 
+import com.example.demo.Services.DrugService;
+import com.example.demo.Models.Drug;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

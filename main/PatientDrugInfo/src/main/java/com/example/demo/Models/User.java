@@ -1,6 +1,5 @@
-package com.example.demo.User;
+package com.example.demo.Models;
 
-import com.example.demo.Security.Role;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

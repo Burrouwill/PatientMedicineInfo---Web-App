@@ -1,6 +1,6 @@
 package com.example.demo.Data;
 
-import com.example.demo.Adr.Adr;
+import com.example.demo.Models.Adr;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 

@@ -1,5 +1,7 @@
-package com.example.demo.Adr;
+package com.example.demo.Services;
 
+import com.example.demo.Models.Adr;
+import com.example.demo.Repositories.AdrRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

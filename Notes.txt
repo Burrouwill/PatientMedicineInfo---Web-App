@@ -1,10 +1,11 @@
 ToDo:
-
+    - Security tutorial: https://www.youtube.com/watch?v=TeBt0Ike_Tk @ 47:00 
 
 PROBLEMS:
     - Security
     - Front End Talking to backend
-    
+    - Can only see one url? Users and Adr's not working 
+    - Refactor User code --> AppUser
 
 
 Datapersistence:
@@ -13,9 +14,9 @@ Datapersistence:
 - User information however needs to be stored
 - What is the best way to acheive this 
 
-Parsers for Adr & Drug
 
-- Refactor Adr parser to remove duplicate code
+
+
 
 Distinction between female / non-female for pregnancy breastfeeding advice 
 

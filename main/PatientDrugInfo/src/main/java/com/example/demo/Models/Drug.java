@@ -1,6 +1,5 @@
-package com.example.demo.Drug;
+package com.example.demo.Models;
 
-import com.example.demo.Adr.Adr;
 import jakarta.persistence.*;
 
 import java.util.List;

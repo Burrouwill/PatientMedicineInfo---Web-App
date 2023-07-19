@@ -1,10 +1,9 @@
-package com.example.demo.Drug;
+package com.example.demo.Configs;
 
+import com.example.demo.Repositories.DrugRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import java.util.List;
 
 @Configuration
 public class DrugConfig {

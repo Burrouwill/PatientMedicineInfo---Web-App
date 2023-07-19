@@ -1,8 +1,8 @@
 package com.example.demo.Data;
 
-import com.example.demo.Adr.Adr;
-import com.example.demo.Adr.AdrService;
-import com.example.demo.Drug.Drug;
+import com.example.demo.Models.Adr;
+import com.example.demo.Services.AdrService;
+import com.example.demo.Models.Drug;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;

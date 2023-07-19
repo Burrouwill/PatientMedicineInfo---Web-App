@@ -1,5 +1,7 @@
-package com.example.demo.User;
+package com.example.demo.Controllers;
 
+import com.example.demo.Models.User;
+import com.example.demo.Services.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

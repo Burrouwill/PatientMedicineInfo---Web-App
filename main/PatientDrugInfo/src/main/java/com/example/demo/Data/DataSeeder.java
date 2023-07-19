@@ -1,10 +1,10 @@
 package com.example.demo.Data;
 
-import com.example.demo.Adr.Adr;
-import com.example.demo.Adr.AdrRepository;
-import com.example.demo.Adr.AdrService;
-import com.example.demo.Drug.Drug;
-import com.example.demo.Drug.DrugRepository;
+import com.example.demo.Models.Adr;
+import com.example.demo.Repositories.AdrRepository;
+import com.example.demo.Services.AdrService;
+import com.example.demo.Models.Drug;
+import com.example.demo.Repositories.DrugRepository;
 import jakarta.annotation.PostConstruct;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
