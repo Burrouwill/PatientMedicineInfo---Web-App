@@ -1,4 +1,4 @@
-# PatientMedicineInfo---Web-App
+# PatientMedicineInfo-Web-App
 Patient Medicine Info Web Application
 
 This repository contains a web application built with Spring Boot that interfaces with a PostgreSQL database using a REST API.
