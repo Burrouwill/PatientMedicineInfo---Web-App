@@ -1,75 +1,60 @@
 package com.example.demo.User;
 
+import com.example.demo.Security.Role;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+
 @Entity
-public class User {
+@Table(name="users")
+public class User implements UserDetails {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "user_id")
+    private int userId;
 
-    private String firstName;
-
-    private String lastName;
+    private String username;
 
     private String password;
 
-    @Column(unique = true)
     private String email;
 
-    @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
-    @Enumerated(EnumType.STRING)
-    private Set<Role> roles = new HashSet<>();
+    @ManyToMany(fetch=FetchType.EAGER)
+    @JoinTable(
+            name="user_role_junction",
+            joinColumns = {@JoinColumn(name ="user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "role_id")}
+    )
+    private Set<Role> authorities;
 
-    public User(){}
+    public User(){
+        super();
+        this.authorities = new HashSet<>();
+    }
 
-    public User(String firstName, String lastName, String password, String email, Set<Role> roles) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public User(String username, String password, String email, Set<Role> authorities) {
+        this.username = username;
         this.password = password;
         this.email = email;
-        this.roles = roles;
+        this.authorities = authorities;
     }
 
-    public enum Role {
-        PATIENT,
-        HEALTHPROF,
-        ADMIN
+    public int getUserId() {
+        return userId;
     }
 
-    public Long getId() {
-        return id;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getPassword() {
-        return password;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public void setPassword(String password) {
@@ -84,11 +69,42 @@ public class User {
         this.email = email;
     }
 
+    public void setAuthorities(Set<Role> authorities) {
+        this.authorities = authorities;
+    }
+
+    @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        HashSet<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
-        for (Role role : roles){
-            authorities.add(new SimpleGrantedAuthority("ROLE_"+role));
-        }
-        return authorities;
+        return this.authorities;
+    }
+
+    @Override
+    public String getPassword() {
+        return this.password;
+    }
+
+    @Override
+    public String getUsername() {
+        return this.username;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }
