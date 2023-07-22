@@ -1,12 +1,12 @@
 package com.example.demo.Repositories;
 
-import com.example.demo.Models.User;
+import com.example.demo.Models.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Integer> {
-    Optional<User> findByUsername(String username);
+public interface RoleRepository extends JpaRepository<Role, Integer>{
+    Optional<Role> findByAuthority(String authority);
 }
