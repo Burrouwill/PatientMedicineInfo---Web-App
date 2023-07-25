@@ -34,6 +34,8 @@ public class SecurityConfiguration {
 
     private final RSAKeyProperties keys;
 
+
+
     public SecurityConfiguration(RSAKeyProperties keys){
         this.keys = keys;
     }
@@ -61,6 +63,8 @@ public class SecurityConfiguration {
                     auth.requestMatchers("/user/**").hasAnyRole("ADMIN", "USER");
                     auth.anyRequest().authenticated();
                 });
+
+
 
         http.oauth2ResourceServer()
                 .jwt()

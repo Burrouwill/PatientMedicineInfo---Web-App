@@ -21,7 +21,7 @@ public class DrugController {
         this.drugService = drugService;
     }
 
-    @GetMapping
+    @GetMapping("/all")
     @Transactional
     public List<Drug> getDrugs() {
         return drugService.getDrugs();
