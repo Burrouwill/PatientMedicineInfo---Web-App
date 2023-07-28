@@ -13,7 +13,7 @@ export default function App() {
     <div>
       <BrowserRouter>
         <Routes>
-          <Route index element={<RegisterPage/>} />
+          <Route index element={<MedicinesPage/>} />
           <Route path="/home" element={<HomePage/>}/>
           <Route path="/login" element={<LoginPage/>} />
           <Route path="/account" element={<AccountPage/>} />

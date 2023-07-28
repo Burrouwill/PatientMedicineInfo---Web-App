@@ -1,64 +1,192 @@
-import React from 'react';
-import { Typography, AppBar, Card, CardActions, CardContent, CardMedia, CssBaseline, Grid, Toolbar, Container } from '@material-ui/core';
-import MedicationIcon from '@mui/icons-material/Medication';
-import Button from '@mui/material/Button';
-import ButtonGroup from '@mui/material/ButtonGroup';
+import * as React from 'react';
+import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import MuiDrawer from '@mui/material/Drawer';
+import Box from '@mui/material/Box';
+import MuiAppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import List from '@mui/material/List';
+import Typography from '@mui/material/Typography';
+import Divider from '@mui/material/Divider';
+import IconButton from '@mui/material/IconButton';
+import Badge from '@mui/material/Badge';
+import Container from '@mui/material/Container';
+import Grid from '@mui/material/Grid';
+import Paper from '@mui/material/Paper';
+import Link from '@mui/material/Link';
+import MenuIcon from '@mui/icons-material/Menu';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import { mainListItems }  from '../Components/listItems';
 
-function MedicinesPage() {
+const drawerWidth = 240;
+
+const AppBar = styled(MuiAppBar, {
+  shouldForwardProp: (prop) => prop !== 'open',
+})(({ theme, open }) => ({
+  zIndex: theme.zIndex.drawer + 1,
+  transition: theme.transitions.create(['width', 'margin'], {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.leavingScreen,
+  }),
+  ...(open && {
+    marginLeft: drawerWidth,
+    width: `calc(100% - ${drawerWidth}px)`,
+    transition: theme.transitions.create(['width', 'margin'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  }),
+}));
+
+const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
+  ({ theme, open }) => ({
+    '& .MuiDrawer-paper': {
+      position: 'relative',
+      whiteSpace: 'nowrap',
+      width: drawerWidth,
+      transition: theme.transitions.create('width', {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.enteringScreen,
+      }),
+      boxSizing: 'border-box',
+      ...(!open && {
+        overflowX: 'hidden',
+        transition: theme.transitions.create('width', {
+          easing: theme.transitions.easing.sharp,
+          duration: theme.transitions.duration.leavingScreen,
+        }),
+        width: theme.spacing(7),
+        [theme.breakpoints.up('sm')]: {
+          width: theme.spacing(9),
+        },
+      }),
+    },
+  }),
+);
+
+// TODO remove, this demo shouldn't need to reset the theme.?
+const defaultTheme = createTheme();
+
+export default function Dashboard() {
+  const [open, setOpen] = React.useState(true);
+  const toggleDrawer = () => {
+    setOpen(!open);
+  };
+
   return (
-    <>
-      <CssBaseline />  {/* Provides default styling */}
-      <AppBar position='relative'>
-        <Toolbar>
-          <MedicationIcon /> {/* Icon in corner */}
-          <Typography variant='h6'>
-            My Medication {/* Text next to the icon*/}
-          </Typography>
-          <ButtonGroup variant="contained" aria-label="outlined primary button group">
-            <Button>Home</Button>
-            <Button></Button>
-            <Button></Button>
-            <Button></Button>
-            <Button></Button>
-            <Button></Button>
-            <Button>Login</Button>
-          </ButtonGroup>
-        </Toolbar>
-      </AppBar>
-      <main>
-        <div>
-          <Container maxWidth='sm'> {/* Contains things within a specific area of the page */}
-            <Typography variant='h2' align='center' color='textPrimary' gutterBottom> {/* Heading */}
-              My Medication
+    <ThemeProvider theme={defaultTheme}>
+      <Box sx={{ display: 'flex' }}>
+        <CssBaseline />
+        <AppBar position="absolute" open={open}>
+          <Toolbar
+            sx={{
+              pr: '24px', // keep right padding when drawer closed
+            }}
+          >
+            
+            <IconButton
+              edge="start"
+              color="inherit"
+              aria-label="open drawer"
+              onClick={toggleDrawer}
+              sx={{
+                marginRight: '36px',
+                ...(open && { display: 'none' }),
+              }}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography
+              component="h1"
+              variant="h6"
+              color="inherit"
+              noWrap
+              sx={{ flexGrow: 1 }}
+            >
+              My Medicines
             </Typography>
-            <Typography variant='h5' align='center' color='texSecondary' paragraph> {/* Paragraph under header */}
-              Here you can find all of your medicines and access information about them.
-              Click on a medicine for additional information.
-            </Typography>
-            <div>
-              <Grid container spacing={2} justifyContent='center'> {/* Grid's always come in pairs. Gridd container --> Wraps Grid item */}
-                <Grid item>
-                  <Button variant='contained' color='primary'>
-                    See My Medication
-
-                  </Button>
-                </Grid>
+            <IconButton color="inherit">
               
-              <Grid item>
-                <Button variant='contained' color='primary'>
-                  Seccond Action 
+              {/* This is where symbol in right corner would go */}
+              
+            </IconButton>
+          </Toolbar>
+        </AppBar>
+        <Drawer variant="permanent" open={open}>
+          <Toolbar
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'flex-end',
+              px: [1],
+            }}
+          >
+            <IconButton onClick={toggleDrawer}>
+              <ChevronLeftIcon />
+            </IconButton>
+          </Toolbar>
+          <Divider />
+          <List component="nav">
+            {mainListItems}
+            <Divider sx={{ my: 1 }} />
 
-                </Button>
+          </List>
+        </Drawer>
+        <Box
+          component="main"
+          sx={{
+            backgroundColor: (theme) =>
+              theme.palette.mode === 'light'
+                ? theme.palette.grey[100]
+                : theme.palette.grey[900],
+            flexGrow: 1,
+            height: '100vh',
+            overflow: 'auto',
+          }}
+        >
+          <Toolbar />
+          <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+            <Grid container spacing={3}>
+              {/* Left List */}
+              <Grid item xs={12} md={7} lg={8}>
+                <Paper
+                  sx={{
+                    p: 2,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    height: 240,
+                  }}
+                >
+                  {/* Add your left list component here */}
+                  Drop down list of Current medicines
+                  Click on each med to get more info about each one 
+                  {/* For example: */}
+                  {/* <LeftList /> */}
+                </Paper>
               </Grid>
+
+              {/* Right List */}
+              <Grid item xs={12} md={5} lg={4}>
+                <Paper
+                  sx={{
+                    p: 2,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    height: 240,
+                  }}
+                >
+                  {/* Add your right list component here */}
+                  Search for all meds in db
+                  Implement Stringsearch 
+                  {/* For example: */}
+                  {/* <RightList /> */}
+                </Paper>
               </Grid>
-            </div>
+            </Grid>
           </Container>
-        </div>
-
-      </main>
-
-    </>
+        </Box>
+      </Box>
+    </ThemeProvider>
   );
 }
-
-export default MedicinesPage;

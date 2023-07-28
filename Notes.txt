@@ -1,5 +1,10 @@
 ToDo:
-    - Security tutorial: https://www.youtube.com/watch?v=TeBt0Ike_Tk @ 47:00 
+    - https://www.youtube.com/watch?v=6qJ8JXWC9IA Connecting a ReactJS Login Page to a Spring RESTful Endpoint
+    - Package both React & Maven on same port (I had a vid for this but need to look it up again) https://www.youtube.com/watch?v=7XxH-G9ckeU? 
+    - Figure out how to do logins! (going to be hard)
+    - Then we need to update backend so that each user has a collection of Drugs thats persistent to them
+    - 
+    - Then figure out how to dynamically access this list within React front end
 
 PROBLEMS:
     - Security
