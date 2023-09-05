@@ -1,73 +1,250 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.0.4</version>
-		<relativePath/> <!-- lookup parent from repository -->
-	</parent>
-	<groupId>com.example</groupId>
-	<artifactId>PatientDrugInfo</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>demo</name>
-	<description>Demo project for Spring Boot</description>
-	<properties>
-		<java.version>17</java.version>
-	</properties>
+window.addEventListener("load", init);
 
-	<dependencies>
+let editing = false;
+let deletedIds  = new Set();
+let currentId = 0;
 
+/**
+ * Marks an ID as deleted. This id is therefore available for use when creating a new item.
+ * @param {<*>} id 
+ */
+function markIdAsDeleted(id){
+    deletedIds.add(id);
+}
 
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency>
+/**
+ * This function handles ids
+ * @returns {number}
+ */
+function getValidId() {
+    if (deletedIds.size > 0) {
+        const smallestDeletedId = Math.min(...deletedIds);
+        deletedIds.delete(smallestDeletedId); 
+        return smallestDeletedId;
+    } else if (currentId == 0) {
+        currentId = auto.next().value;
+        return 1;
 
-		<!-- Postgres Driver -->
-		<dependency>
-			<groupId>org.postgresql</groupId>
-			<artifactId>postgresql</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-devtools</artifactId>
-			<scope>runtime</scope>
-			<optional>true</optional>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>
+    } else {
+        let currentId = auto.next().value;
+        return currentId - 1;
+    }
+}
 
 
-	</dependencies>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
+function init() {
+    clearAll();
+    loadId();
+    showTotal();
+    bindEvents();
+}
 
-</project>
+/**
+ * This function clears the contents of the form except the ID (since ID is auto generated)
+ */
+function clearAll() {
+    document.querySelector("#name").value = "";
+    document.querySelector("#desc").value = "";
+    document.querySelector("#price").value = "";
+    document.querySelector("#color").value = "#000000";
+    document.querySelector("#url").value = "";
+}
+
+let auto = autoGen();
+
+/**
+ * this function automatically sets the value of ID
+ */
+function loadId() {
+    document.querySelector('#id').innerText = getValidId();
+}
+
+/**
+ * this function populates the values of #total, #mark and #unmark ids of the form
+ */
+function showTotal() {
+    const total = itemOperations.items.length
+    const mark = itemOperations.countTotalMarked();
+    const unmarked = total - mark;
+
+    document.querySelector("#total").innerText = total;
+    document.querySelector("#mark").innerText = mark;
+    document.querySelector("#unmark").innerText = unmarked;
+}
+
+function bindEvents() {
+    document.querySelector('#remove').addEventListener('click', deleteRecords);
+    document.querySelector('#add').addEventListener('click', addRecord);
+    document.querySelector('#update').addEventListener('click', updateRecord)
+    document.querySelector('#exchange').addEventListener('change', getExchangerate)
+}
+
+/**
+ * this function deletes the selected record from itemOperations and prints the table using the function printTable
+ */
+function deleteRecords() {
+    
+    for (item of itemOperations.items){
+        if (item.isMarked){
+            deletedIds.add(item.id);
+        }
+    }
+    
+    itemOperations.remove();
+    printTable(itemOperations.items);
+    showTotal();
+    document.querySelector("#id").innerText = getValidId();
+
+}
+
+/**
+ * this function adds a new record in itemOperations and then calls printRecord(). showTotal(), loadId() and clearAll()
+ */
+function addRecord() {
+
+    if (!editing) {
+
+        const newItem = {
+            id: parseInt(document.querySelector("#id").innerText),
+            name: document.querySelector("#name").value,
+            description: document.querySelector('#desc').value,
+            price: parseFloat(document.querySelector("#price").value),
+            color: document.querySelector("#color").value,
+            url: document.querySelector("#url").value,
+            isMarked: false
+        }
+
+        itemOperations.add(newItem);
+        printRecord(newItem);
+        showTotal();
+        clearAll();
+        document.querySelector("#id").innerText = getValidId();
+
+    }
+}
+
+/**
+ * this function fills (calls fillFields()) the form with the values of the item to edit after searching it in items
+ */
+function edit() {
+    const id = this.getAttribute("data-itemid");
+    const item = itemOperations.search(id)
+    if (item) {
+        editing = true;
+        fillFields(item);
+    }
+}
+
+/**
+ * this function fills the form with the details of itemObject
+ * @param {*} itemObject 
+ */
+function fillFields(itemObject) {
+    document.querySelector("#id").innerText = itemObject.id
+    document.querySelector("#name").value = itemObject.name
+    document.querySelector("#desc").value = itemObject.desc
+    document.querySelector("#price").value = itemObject.price
+    document.querySelector("#color").value = itemObject.color
+    document.querySelector("#url").value = itemObject.url
+}
+
+/**
+ * /* this function creates icons for edit and trash for each record in the table
+ * @param {*} className 
+ * @param {*} fn 
+ * @param {*} id 
+ * @returns 
+ */
+function createIcon(className, fn, id) {
+    // <i class="fas fa-trash"></i>
+    // <i class="fas fa-edit"></i>
+    var iTag = document.createElement("i");
+    iTag.className = className;
+    iTag.addEventListener('click', fn);
+    iTag.setAttribute("data-itemid", id);
+
+    return iTag;
+}
+
+/**
+ * this function updates the record that is edited and then prints the table using printTable()
+ */
+function updateRecord() {
+    
+    
+    const id = parseInt(document.querySelector('#id').innerText);
+    const updatedItem = {
+        id: id,
+        name: document.querySelector('#name').value,
+        description: document.querySelector('#desc').value,
+        price: parseFloat(document.querySelector('#price').value),
+        color: document.querySelector("#color").value,
+        url: document.querySelector("#url").value,
+        isMarked: false
+    }
+
+    const itemIndex = itemOperations.items.findIndex(item => item.id === id);
+    if (itemIndex !== -1) {
+        itemOperations.items[itemIndex] = updatedItem;
+        printTable(itemOperations.items);
+        showTotal();
+        clearAll();
+    }
+
+    editing = false;
+}
+
+/**
+ * this function toggles the color of the row when its trash button is selected and updates the marked and unmarked fields
+ */
+function trash() {
+
+    let id = this.getAttribute('data-itemid');
+    itemOperations.markUnMark(id);
+    showTotal();
+    let tr = this.parentNode.parentNode;
+    tr.classList.toggle('alert-danger');
+    console.log("I am Trash ", this.getAttribute('data-itemid'))
+}
+
+
+/**
+ * this function calls printRecord for each item of items and then calls the showTotal function
+ */
+function printTable(items) {
+
+    const tbody = document.querySelector("#items");
+    tbody.innerHTML = "";
+
+    for (const item of items) {
+        printRecord(item);
+    }
+}
+
+
+function printRecord(item) {
+    var tbody = document.querySelector('#items');
+    var tr = tbody.insertRow();
+    var index = 0;
+    for (let key in item) {
+        if (key == 'isMarked') {
+            continue;
+        }
+        let cell = tr.insertCell(index);
+        cell.innerText = item[key];
+        index++;
+    }
+    var lastTD = tr.insertCell(index);
+    lastTD.appendChild(createIcon('fas fa-trash mr-2', trash, item.id));
+    lastTD.appendChild(createIcon('fas fa-edit', edit, item.id));
+}
+
+
+/**
+ * this function makes an AJAX call to http://apilayer.net/api/live to fetch and display the exchange rate for the currency selected
+ */
+function getExchangerate() {
+
+
+}
